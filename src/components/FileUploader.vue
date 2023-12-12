@@ -29,64 +29,107 @@
         style="display: none"
       />
     </div>
+    <div>
+      <label for="shiftnum">Shift number: </label>
+      <input id="shiftnum" type="number" v-model="shift" placeholder="Enter a shift number in a 1-10 range" max="10" min="1">
+    </div>
     <div class="options-area">
       <input type="checkbox" id="custom-key" v-model="useCustomKey" />
       <label for="custom-key">Provide your own key</label>
       <div v-if="useCustomKey" class="key-options">
-        <input
-          type="text"
-          placeholder="Initialization Vector (16 hexadecimal bytes)"
-        />
-        <input type="text" placeholder="Key (32 hexadecimal bytes)" />
-        <input type="number" placeholder="Shift number (1-10)" />
+        <input type="text" placeholder="Initialization Vector (16 hexadecimal bytes)" v-model="iv"/>
+        <input type="text" placeholder="Key (32 hexadecimal bytes)" v-model="key"/>
       </div>
       <div class="scramble-options">
         <button @click="scrambleFiles">Scramble</button>
-        <button @click="unscrambleFiles">Unscramble</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data() {
     return {
       useCustomKey: false,
       uploadedFiles: [], // Array to store uploaded files
+      iv: '',
+      key: '',
+      shift: 0,
+      // file: null
     };
   },
   methods: {
     selectFiles() {
-      // Trigger the file input element
       this.$refs.fileInput.click();
     },
     onFilesSelected(event) {
       const files = event.target.files;
-      this.uploadedFiles = Array.from(files); // Store the selected files
+      this.uploadedFiles = Array.from(files);
     },
     onDrop(event) {
       event.preventDefault();
       const files = event.dataTransfer.files;
-      this.uploadedFiles = Array.from(files); // Store the dropped files
-    },
-    scrambleFiles() {
-      // Handle scrambling files
+      this.uploadedFiles = Array.from(files);
     },
     unscrambleFiles() {
       // Handle unscrambling files
     },
     async scrambleFiles() {
-      // Menampilkan halaman loading
       this.$router.push({ name: "loading" });
 
-      // Lakukan proses penyiapan dan pemrosesan file di sini
-      // Misalnya, pemanggilan API atau operasi file yang kompleks
+      if (0 > this.shift || this.shift >= 10) {
+        console.error("input a number in the range of 1-10")
+        return;
+      }
 
-      // Tambahkan logika penyelesaian pemrosesan file di sini
+      let formData = new FormData();
 
-      // Menyembunyikan halaman loading setelah pemrosesan selesai
-      this.$router.replace({ name: "fileUploader" });
+      if (this.useCustomKey === true) {
+        formData.append('file', this.uploadedFiles[0]);
+        formData.append('iv', this.iv);
+        formData.append('key', this.key);
+        formData.append('shift', this.shift);
+        formData.append('provide', 'false')
+
+        const hexRegex = /^[0-9a-fA-F]+$/;
+        if (!hexRegex.test(this.iv) || this.iv.length !== 32) {
+          console.error("Invalid 'iv'. It should be a 16 bytes hexadecimal string.");
+          return;
+        }
+  
+        if (!hexRegex.test(this.key) || this.key.length !== 64) {
+          console.error("Invalid 'key'. It should be a 32 bytes hexadecimal string.");
+          return;
+        }
+      }
+
+      else {
+        formData.append('file', this.uploadedFiles[0])
+        formData.append('provide', 'true')
+        formData.append('shift', this.shift)
+
+        console.log(formData)
+      }
+
+      try {
+        await axios.post('http://localhost:3000/upload', formData)
+        .then((response) => {
+          console.log(response.data)
+          this.$router.push({
+            name: "download",
+            params: {
+              data: JSON.stringify(response.data)
+            }
+          });
+          
+        });
+
+      } catch (error) {
+        console.error("Error uploading file", error);
+      }
     },
   },
 };
@@ -146,7 +189,7 @@ export default {
   margin-right: 10px;
 }
 
-.key-options input {
+#shiftnum, .key-options input {
   display: block;
   width: 100%;
   padding: 8px;

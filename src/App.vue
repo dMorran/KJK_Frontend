@@ -2,11 +2,9 @@
   <div class="app">
     <header class="app-header">
       <div class="container">
-        <div class="judul">Scrambled</div>
+        <RouterLink class="judul" to="/">Scrambled</RouterLink>
         <nav>
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/scramble">Scramble</RouterLink>
-          <RouterLink to="/download">Halaman Download</RouterLink>
+          <RouterLink to="/unscramble"><p>Unscramble</p></RouterLink>
         </nav>
       </div>
     </header>
@@ -65,7 +63,7 @@ nav {
 }
 
 nav a {
-  color: #fff;
+  color: #0055c5;
   margin-right: 15px;
   text-decoration: none;
 }
@@ -85,7 +83,12 @@ main {
   padding: 20px;
   text-align: center;
   background-color: #f9f9f9;
-  width: 300px;
+  width: 50vh;
   margin: auto;
 }
+
+.router-link-exact-active {
+  color: #f2f2f2;
+}
+
 </style>

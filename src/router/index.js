@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/views/Home.vue";
+import Download from "@/views/DownloadView.vue";
+import Unscramble from "@/views/Unscramble.vue";
+import DLUnscrambled from "@/views/downloadUnscrambled.vue";
 
 const routes = [
   {
@@ -10,19 +13,25 @@ const routes = [
   {
     path: "/loading",
     name: "loading",
-    // route level code-splitting
-    // this generates a separate chunk (About.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import("../views/LoadingView.vue"),
   },
   {
-    path: "/download",
+    path: "/download/:data",
     name: "download",
-    // route level code-splitting
-    // this generates a separate chunk (About.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import("../views/DownloadView.vue"),
+    component: Download,
+    props: true
   },
+  {
+    path: "/unscramble",
+    name: "unscramble",
+    component: Unscramble
+  },
+  {
+    path: "/dl-unscrambled/:data",
+    name: "dl-unscrambled",
+    props: true,
+    component: DLUnscrambled
+  }
 ];
 
 const router = createRouter({

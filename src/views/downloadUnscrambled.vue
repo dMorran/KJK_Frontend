@@ -1,23 +1,12 @@
 <template>
   <div class="download" v-if="checkData">
-    <h1>File Metadata Has Been Scrambled!</h1>
+    <h1>File Metadata Has Been Unscrambled!</h1>
     <button class="button is-normal">
       <a :href="fileData.data.link">Download</a>
     </button>
-    <div class="notes">
-      <h1>Important Notes!</h1>
-      <div class="grey-box">
-        If you ever feel like un-scrambling your file back, then save the keys
-        below, you will not see this again!
-        <li>Filename: {{ fileData.data.filename }}</li>
-        <li>Initialization vector: {{ fileData.data.recovery_vector }}</li>
-        <li>Key: {{ fileData.data.recovery_key }}</li>
-        <li>Shift Number: {{ fileData.data.recovery_shift_number }}</li>
-      </div>
-    </div>
   </div>
   <div v-else>
-    <h1>Scramble a file first!</h1>
+    <h1>Submit the form <RouterLink to="/unscramble">here</RouterLink> first!</h1>
   </div>
 </template>
 
@@ -31,7 +20,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.fileData)
+    console.log(this.fileData.data.link)
 
     if (this.data) {
       this.checkData = true
