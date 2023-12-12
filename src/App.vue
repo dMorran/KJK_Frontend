@@ -26,7 +26,7 @@ export default {
 .app {
   text-align: center;
   font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
+  background-color: #fff;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -46,10 +46,12 @@ export default {
 
 .judul {
   font-size: 35px;
+  color: #fff;
 }
 
 .container {
   display: flex;
+  color: #fff;
   justify-content: space-between;
 }
 
@@ -60,10 +62,11 @@ h1 {
 nav {
   display: flex;
   font-size: 20px;
+  color: #fff;
 }
 
 nav a {
-  color: #0055c5;
+  color: #fff;
   margin-right: 15px;
   text-decoration: none;
 }
@@ -82,13 +85,12 @@ main {
   border-radius: 4px;
   padding: 20px;
   text-align: center;
-  background-color: #f9f9f9;
+  background-color: #fff;
   width: 50vh;
   margin: auto;
 }
 
 .router-link-exact-active {
-  color: #f2f2f2;
+  color: #fff;
 }
-
 </style>

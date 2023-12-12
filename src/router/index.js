@@ -14,24 +14,25 @@ const routes = [
     path: "/loading",
     name: "loading",
     component: () => import("../views/LoadingView.vue"),
+    props: true,
   },
   {
     path: "/download/:data",
     name: "download",
     component: Download,
-    props: true
+    props: true,
   },
   {
     path: "/unscramble",
     name: "unscramble",
-    component: Unscramble
+    component: Unscramble,
   },
   {
     path: "/dl-unscrambled/:data",
     name: "dl-unscrambled",
     props: true,
-    component: DLUnscrambled
-  }
+    component: DLUnscrambled,
+  },
 ];
 
 const router = createRouter({
