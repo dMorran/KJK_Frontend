@@ -2,11 +2,11 @@
 
 Nama Anggota:
 
-- Rifqi Akhmad Maulana   (5027211035)  [Backend & Integrasi backend-frontend]
-- Naufal Ammar Saputra   (5027211052)  [Frontend]
-- Oktavia Anggraeni P    (5027211001)  [UI/UX]
-- Dyas Amorita Radhwa N  (5027211009)  [UI/UX]
-- Anisa Ghina Salsabila  (5027211062)  [Frontend]
+- Rifqi Akhmad Maulana   (5027211035)  - Backend & Integrasi backend-frontend
+- Naufal Ammar Saputra   (5027211052)  - Frontend
+- Oktavia Anggraeni P    (5027211001)  - UI/UX
+- Dyas Amorita Radhwa N  (5027211009)  - Frontend
+- Anisa Ghina Salsabila  (5027211062)  - UI/UX
 
 ## Penjelasan Proyek Scramble
 Keamanan metadata dalam suatu file merupakan hal yang sangat penting, karena metadata dapat mengandung informasi rinci tentang file tersebut, termasuk aspek sensitif seperti waktu pembuatan, pemilik, dan riwayat modifikasi. Untuk menjaga privasi dan mencegah potensi risiko keamanan, sangat penting untuk melakukan enkripsi terhadap metadata guna melindungi informasi sensitif dan memastikan bahwa data tersebut tidak jatuh pada pihak yang tidak bertanggung-jawab.
